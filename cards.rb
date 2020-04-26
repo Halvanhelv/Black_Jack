@@ -17,6 +17,4 @@ class Cards
     count += 10 if %w[J Q K].include? value.to_s
     count
   end
-
-
 end

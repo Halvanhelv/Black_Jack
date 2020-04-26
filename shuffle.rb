@@ -7,15 +7,14 @@ class Shuffle
 
   attr_accessor :cards
 
-  def take_cards
-    @cards = generate_cards.shift(2)
+  def self.take_cards
+    @cards = generate_cards.pop(2)
   end
-
-
 
   def self.add_card
-    generate_cards.shift(1)
+    generate_cards.pop
   end
+
   def self.generate_cards
     cards = []
     CARD_SUITS.each do |suit|

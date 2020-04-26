@@ -1,21 +1,27 @@
 # frozen_string_literal: true
+
 require_relative 'game'
 class Player
-  attr_accessor :bank, :name, :cards
-  def initialize(name, cards)
+  attr_accessor :bank, :name, :cards, :main
+  def initialize(name, cards, main)
+    @main = main
     @bank = 100
     @name = name
     @cards = cards
-    start
     @bank -= Game.start_party
-
   end
 
   def start
     show_cards
-    case gets.chomp.to_s
+    case gets.chomp.to_i
     when 1 then add_card
     end
+  end
+
+  def add_card
+    @cards << Shuffle.add_card
+    show_cards
+    main.step(self)
   end
 
   def show_cards
@@ -27,5 +33,4 @@ class Player
     end
     puts "У вас #{count} очков"
   end
-
 end
