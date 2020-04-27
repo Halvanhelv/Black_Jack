@@ -19,7 +19,9 @@ class Game
       puts '1 Начать игру'
       puts '2 Закрыть игру'
       case gets.chomp.to_i
-      when 1 then Main.new
+      when 1
+        puts 'Введите свое имя'
+        Main.new(gets.chomp.to_s)
       when 2 then exit
       end
     end

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Main
-  attr_reader :player, :crop, :user
-  def initialize
-    puts 'Введите имя'
-    name = gets.chomp.to_s
+  attr_reader :player, :crop, :user, :name
+  def initialize(name)
+    @name = name
     cards = Shuffle
     @crop = Crop.new(cards.take_cards, self)
     @user = User.new(name, cards.take_cards, self)
@@ -24,7 +23,7 @@ class Main
     puts '1 Сыграть снова?'
     puts '2 Закончить игру?'
     case gets.chomp.to_i
-    when 1 then Main.new
+    when 1 then Main.new(@user.name)
     when 2 then exit
     else
       exit
