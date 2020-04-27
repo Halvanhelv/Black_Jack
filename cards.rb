@@ -13,8 +13,10 @@ class Cards
 
   def include_card
     count = 0
-    count = value.to_i if [2, 3, 4, 5, 6, 7, 8, 9, 10].include? value.to_i
+    count += value.to_i if [2, 3, 4, 5, 6, 7, 8, 9, 10].include? value.to_i
     count += 10 if %w[J Q K].include? value.to_s
+    count += 11 if (%w[A].include? value.to_s) && (count + 11 < 21)
+    count += 1 if %w[A].include? value.to_s
     count
   end
 end

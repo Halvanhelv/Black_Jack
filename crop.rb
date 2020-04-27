@@ -1,22 +1,20 @@
 # frozen_string_literal: true
 
-class Crop
-  attr_accessor :cards, :bank, :count,:main
-  def initialize(cards,main)
+class Crop < Player
+  attr_accessor :cards, :bank, :main, :scoupe
+  def initialize(cards, main)
+    super(cards, main)
     @main = main
     @bank = 100
     @cards = cards
-    @bank -= Game.start_party
-    show_cards
-
+    @bank -= 10
   end
 
   def start
-
-    @cards << Shuffle.add_card if @count <= 17
     show_cards
-    main.step(self)
-
+    @cards << Shuffle.add_card if @scoupe <= 17
+    puts 'Сейчас идет Игрок'
+    self
   end
 
   def add_card
@@ -28,13 +26,13 @@ class Crop
   end
 
   def show_cards
-    @count = 0
+    @scoupe = 0
     puts 'Карты диллера'
 
     @cards.each do |index|
-      index.show
-      @count += index.include_card
+      puts '[*,*]'
+      @scoupe += index.include_card
     end
-    puts "У диллера #{count} очков"
+    puts 'У диллера * очков'
   end
   end

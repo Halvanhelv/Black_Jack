@@ -1,30 +1,46 @@
 # frozen_string_literal: true
 
-require_relative 'crop'
-require_relative 'player'
-require_relative 'shuffle'
 class Main
-  attr_reader :player, :crop
+  attr_reader :player, :crop, :user
   def initialize
     puts 'Введите имя'
     name = gets.chomp.to_s
     cards = Shuffle
-    @player = Player.new(name, cards.take_cards, self)
+    @user = User.new(name, cards.take_cards, self)
     @crop = Crop.new(cards.take_cards, self)
-    start(player)
+    start(user)
   end
 
-  def step(user)
-    if user.class == Player
-      @crop.start
-    elsif user.class == Crop
-      @player.start
+  def winner?
+    if @user.scoupe < 21 && @user.scoupe > @crop.scoupe
+      puts "Игрок #{@user.name} Победил.  Cчет: диллера #{@crop.scoupe} игрока #{@user.name} #{@user.scoupe} "
+    elsif @crop.scoupe < 21
+      puts "Игрок #{@user.name} Проиграл Cчет: диллера #{@crop.scoupe} игрока #{@user.name} #{@user.scoupe}"
+    else
+      puts 'Ничья'
+    end
+    puts 'Что вы хотите сделать?'
+    puts '1 Сыграть снова?'
+    puts '2 Закончить игру?'
+    case gets.chomp.to_i
+    when 1 then Main.new
+    when 2 then exit
+    else
+      exit
     end
   end
 
-  def start(unit)
-    unit.start
+  def who_win?
+    winner? if user.cards.count > 2 && crop.cards.count > 2
+  end
+
+  def start(player)
+    who_win?
+    step = player.start
+    if step == user
+      start(crop)
+    else
+      start(user)
+    end
   end
 end
-
-Main.new
