@@ -8,6 +8,7 @@ class Crop < Player
     @bank = 100
     @cards = cards
     @bank -= 10
+    show_cards
   end
 
   def start

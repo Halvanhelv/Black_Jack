@@ -6,16 +6,17 @@ class Main
     puts 'Введите имя'
     name = gets.chomp.to_s
     cards = Shuffle
-    @user = User.new(name, cards.take_cards, self)
     @crop = Crop.new(cards.take_cards, self)
+    @user = User.new(name, cards.take_cards, self)
+
     start(user)
   end
 
   def winner?
     if @user.scoupe < 21 && @user.scoupe > @crop.scoupe
-      puts "Игрок #{@user.name} Победил.  Cчет: диллера #{@crop.scoupe} игрока #{@user.name} #{@user.scoupe} "
+      puts "Игрок #{@user.name} Победил.  Cчет: диллера #{@crop.scoupe} игрока #{@user.name} #{@user.scoupe} #{@user.show_cards} "
     elsif @crop.scoupe < 21
-      puts "Игрок #{@user.name} Проиграл Cчет: диллера #{@crop.scoupe} игрока #{@user.name} #{@user.scoupe}"
+      puts "Игрок #{@user.name} Проиграл Cчет: диллера #{@crop.scoupe} игрока #{@user.name} #{@user.scoupe} #{@crop.show_cards}"
     else
       puts 'Ничья'
     end
