@@ -1,29 +1,28 @@
 # frozen_string_literal: true
 
 class Main
-  attr_reader :player, :crop, :user, :name
-  def initialize(name)
+  attr_reader :player, :crop, :user, :name, :interface
+  def initialize(name, interface)
+    @interface = interface
     @name = name
     cards = Shuffle
-    @crop = Crop.new(cards.take_cards, self)
-    @user = User.new(name, cards.take_cards, self)
+    @crop = Crop.new(cards.take_cards, self, interface)
+    @user = User.new(name, cards.take_cards, self, interface)
 
     start(user)
   end
 
   def winner?
     if @user.scoupe < 21 && @user.scoupe > @crop.scoupe
-      puts "Игрок #{@user.name} Победил.  Cчет: диллера #{@crop.scoupe} игрока #{@user.name} #{@user.scoupe} #{@user.show_cards} "
+      interface.win_player(@user, @crop)
     elsif @crop.scoupe < 21
-      puts "Игрок #{@user.name} Проиграл Cчет: диллера #{@crop.scoupe} игрока #{@user.name} #{@user.scoupe} #{@crop.show_cards}"
+      interface.win_diler(@user, @crop)
     else
       puts 'Ничья'
     end
-    puts 'Что вы хотите сделать?'
-    puts '1 Сыграть снова?'
-    puts '2 Закончить игру?'
+    interface.start_menu
     case gets.chomp.to_i
-    when 1 then Main.new(@user.name)
+    when 1 then Main.new(@user.name, interface)
     when 2 then exit
     else
       exit

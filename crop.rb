@@ -2,8 +2,8 @@
 
 class Crop < Player
   attr_accessor :cards, :bank, :main, :scoupe
-  def initialize(cards, main)
-    super(cards, main)
+  def initialize(cards, main, interface)
+    super(cards, main, interface)
     @main = main
     @bank = 100
     @cards = cards
@@ -14,7 +14,6 @@ class Crop < Player
   def start
     show_cards
     @cards << Shuffle.add_card if @scoupe <= 17
-    puts 'Сейчас идет Игрок'
     self
   end
 
@@ -27,13 +26,6 @@ class Crop < Player
   end
 
   def show_cards
-    @scoupe = 0
-    puts 'Карты диллера'
-
-    @cards.each do |index|
-      puts '[*,*]'
-      @scoupe += index.include_card
-    end
-    puts 'У диллера * очков'
+    @scoupe = interface.show_cards(@cards, self)
   end
   end

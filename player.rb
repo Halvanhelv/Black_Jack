@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Player
-  attr_accessor :bank, :name, :cards, :main, :scoupe
-  def initialize(cards, main)
+  attr_accessor :bank, :name, :cards, :main, :scoupe, :interface
+  def initialize(cards, main, interface)
     @main = main
+    @interface = interface
     @bank = 100
     @cards = cards
     @bank -= 10
