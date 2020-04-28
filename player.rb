@@ -10,6 +10,14 @@ class Player
     @bank -= 10
   end
 
+  def show_cards
+    @scoupe = if self.class == User
+                interface.show_cards(@cards)
+              else
+                interface.show_diler_cards(@cards)
+              end
+  end
+
   def start
     main.step(self)
   end

@@ -63,8 +63,8 @@ class Game
     scoupe
   end
 
-  def show_cards(cards, player)
-    if player.class == User
+  def show_cards(cards)
+
       scoupe = 0
       puts 'Ваши карты'
       cards.each do |index|
@@ -73,9 +73,7 @@ class Game
       end
       puts "У вас #{scoupe} очков"
       scoupe
-    else
-      show_diler_cards(cards)
-    end
+
   end
   def start_menu
     puts 'Что вы хотите сделать?'

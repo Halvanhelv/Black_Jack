@@ -15,9 +15,7 @@ class User < Player
     self
   end
 
-  def show_cards
-    @scoupe = interface.show_cards(@cards, self)
-  end
+
 rescue RuntimeError => e
   puts e.message.to_s
   retry

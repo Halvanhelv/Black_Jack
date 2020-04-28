@@ -25,7 +25,5 @@ class Crop < Player
     end
   end
 
-  def show_cards
-    @scoupe = interface.show_cards(@cards, self)
-  end
+
   end
