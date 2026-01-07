@@ -18,7 +18,7 @@ class Main
     elsif @crop.scoupe < 21
       interface.win_diler(@user, @crop)
     else
-      puts 'Ничья'
+      puts 'Draw'
     end
     interface.start_menu
     case gets.chomp.to_i

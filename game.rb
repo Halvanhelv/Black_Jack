@@ -15,12 +15,12 @@ class Game
 
   def go
     loop do
-      puts 'Добро пожаловать в игру Black Jack'
-      puts '1 Начать игру'
-      puts '2 Закрыть игру'
+      puts 'Welcome to Black Jack game'
+      puts '1 Start game'
+      puts '2 Exit game'
       case gets.chomp.to_i
       when 1
-        puts 'Введите свое имя'
+        puts 'Enter your name'
         Main.new(gets.chomp.to_s, self)
       when 2 then exit
       end
@@ -28,57 +28,57 @@ class Game
   end
 
   def start(player)
-    puts 'Что вы хотите сделать'
-    puts '1 Добавить себе 1 карту'
-    puts '2 Пропустить ход'
-    puts '3 Вскрыть карты'
+    puts 'What do you want to do'
+    puts '1 Add 1 card'
+    puts '2 Skip turn'
+    puts '3 Show cards'
     case gets.chomp.to_i
     when 1 then player.add_card
-    when 2 then puts 'Ход диллера'
+    when 2 then puts 'Dealer\'s turn'
     when 3 then player.main.winner?
     else
-      raise 'пожалуйста введите правильный вариант'
+      raise 'please enter a valid option'
     end
-    puts 'Сейчас идет диллер'
+    puts 'Dealer is playing now'
   end
 
 
   def win_diler(user, crop)
-    puts "Игрок #{user.name} Проиграл Cчет: диллера #{crop.scoupe} игрока #{user.name} #{user.scoupe} "
+    puts "Player #{user.name} Lost. Score: dealer #{crop.scoupe} player #{user.name} #{user.scoupe} "
   end
 
   def win_player(user, crop)
-    puts "Игрок #{user.name} Победил.  Cчет: диллера #{crop.scoupe} игрока #{user.name} #{user.scoupe} "
+    puts "Player #{user.name} Won. Score: dealer #{crop.scoupe} player #{user.name} #{user.scoupe} "
   end
 
   def show_diler_cards(cards)
     scoupe = 0
-    puts 'Карты диллера'
+    puts 'Dealer\'s cards'
 
     cards.each do |index|
       puts '[*,*]'
       scoupe += index.include_card
     end
-    puts 'У диллера * очков'
+    puts 'Dealer has * points'
     scoupe
   end
 
   def show_cards(cards)
 
       scoupe = 0
-      puts 'Ваши карты'
+      puts 'Your cards'
       cards.each do |index|
         index.show
         scoupe += index.include_card
       end
-      puts "У вас #{scoupe} очков"
+      puts "You have #{scoupe} points"
       scoupe
 
   end
   def start_menu
-    puts 'Что вы хотите сделать?'
-    puts '1 Сыграть снова?'
-    puts '2 Закончить игру?'
+    puts 'What do you want to do?'
+    puts '1 Play again?'
+    puts '2 End game?'
   end
 end
 Game.new

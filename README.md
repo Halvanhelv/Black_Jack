@@ -1,4 +1,4 @@
 # Black_Jack
-Игра Black Jack реализованная на ruby
+Black Jack game implemented in Ruby
 
-Для запуска игры ruby game.rb
+To start the game: ruby game.rb
